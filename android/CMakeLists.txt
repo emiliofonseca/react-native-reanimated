@@ -105,23 +105,23 @@ target_include_directories(
         "${SRC_DIR}/main/cpp"
 )
 
-find_library(
+find_package(
         LOG_LIB
         log
 )
-find_library(
+find_package(
         REACT_NATIVE_JNI_LIB
         reactnativejni
         PATHS ${LIBRN_DIR}
         NO_CMAKE_FIND_ROOT_PATH
 )
-find_library(
+find_package(
         GLOG_LIB
         glog
         PATHS ${LIBRN_DIR}
         NO_CMAKE_FIND_ROOT_PATH
 )
-find_library(
+find_package(
         FBJNI_LIB
         fbjni
         PATHS ${LIBRN_DIR}
@@ -129,14 +129,14 @@ find_library(
 )
 
 if(${REACT_NATIVE_MINOR_VERSION} LESS 69)
-    find_library(
+    find_package(
             FOLLY_LIB
             folly_json
             PATHS ${LIBRN_DIR}
             NO_CMAKE_FIND_ROOT_PATH
     )
 else()
-    find_library(
+    find_package(
             FOLLY_LIB
             folly_runtime
             PATHS ${LIBRN_DIR}
@@ -147,7 +147,7 @@ endif()
 if(${REACT_NATIVE_MINOR_VERSION} LESS 66)
     set (JSI_LIB "")
 else()
-    find_library(
+    find_package(
             JSI_LIB
             jsi
             PATHS ${LIBRN_DIR}
@@ -156,61 +156,61 @@ else()
 endif()
 
 if(${IS_NEW_ARCHITECTURE_ENABLED})
-    find_library(
+    find_package(
             REACT_RENDER_UIMANAGER
             react_render_uimanager
             PATHS ${LIBRN_DIR}
             NO_CMAKE_FIND_ROOT_PATH
     )
-    find_library(
+    find_package(
             REACT_RENDER_MOUNTING
             react_render_mounting
             PATHS ${LIBRN_DIR}
             NO_CMAKE_FIND_ROOT_PATH
     )
-    find_library(
+    find_package(
             REACT_RENDER_COMPONENTREGISTRY
             react_render_componentregistry
             PATHS ${LIBRN_DIR}
             NO_CMAKE_FIND_ROOT_PATH
     )
-    find_library(
+    find_package(
             REACT_RENDER_CORE
             react_render_core
             PATHS ${LIBRN_DIR}
             NO_CMAKE_FIND_ROOT_PATH
     )
-    find_library(
+    find_package(
             REACT_DEBUG
             react_debug
             PATHS ${LIBRN_DIR}
             NO_CMAKE_FIND_ROOT_PATH
     )
-    find_library(
+    find_package(
             REACT_RENDER_DEBUG
             react_render_debug
             PATHS ${LIBRN_DIR}
             NO_CMAKE_FIND_ROOT_PATH
     )
-    find_library(
+    find_package(
             RRC_ROOT
             rrc_root
             PATHS ${LIBRN_DIR}
             NO_CMAKE_FIND_ROOT_PATH
     )
-    find_library(
+    find_package(
             RRC_VIEW
             rrc_view
             PATHS ${LIBRN_DIR}
             NO_CMAKE_FIND_ROOT_PATH
     )
-    find_library(
+    find_package(
             REACT_RENDER_SCHEDULER
             react_render_scheduler
             PATHS ${LIBRN_DIR}
             NO_CMAKE_FIND_ROOT_PATH
     )
-    find_library(
+    find_package(
             FABRICJNI
             fabricjni
             PATHS ${LIBRN_DIR}
@@ -253,7 +253,7 @@ if(${JS_RUNTIME} STREQUAL "hermes")
         )
     endif()
     if (${HERMES_ENABLE_DEBUGGER})
-        find_library(
+        find_package(
                 HERMES_EXECUTOR_LIB
                 hermes-executor-debug
                 PATHS ${LIBRN_DIR}
@@ -276,7 +276,7 @@ elseif(${JS_RUNTIME} STREQUAL "v8")
             "${JS_RUNTIME_DIR}/src"
     )
     file (GLOB V8_SO_DIR "${JS_RUNTIME_DIR}/android/build/intermediates/library_jni/*/jni/${ANDROID_ABI}")
-    find_library(
+    find_package(
             V8EXECUTOR_LIB
             v8executor
             PATHS ${V8_SO_DIR}
@@ -288,7 +288,7 @@ elseif(${JS_RUNTIME} STREQUAL "v8")
     )
 else()
     string(APPEND CMAKE_CXX_FLAGS " -DJS_RUNTIME_JSC=1")
-    find_library(
+    find_package(
             JSEXECUTOR_LIB
             jscexecutor
             PATHS ${LIBRN_DIR}
